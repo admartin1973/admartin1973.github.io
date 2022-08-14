@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="fondo">
+            <div class="contenedor">
+                <img class="logo" src="./Imagenes/Logo.png" alt="Logo de Alura Latam">
+                
+                <textarea cols="30" rows="20" placeholder="Ingrese el texto aqui"></textarea>
+
+                <div class="leyenda">
+                    <img class="signo-admiracion" src="./Imagenes/Vector.png" alt="Imagen signo admiración">
+                    <legend>Solo letras minúsculas y sin acento</legend>
+                </div>
+                
+                <div class="botones">
+                    <button class="boton-encriptar" id="encriptar">Encriptar</button>
+                    <button class="boton-desencriptar" id="desencriptar">Desencriptar</button>
+                </div>
+
+                <div class="resultado">
+                    <div class="resultado-hijo">
+                        <p class="texto-resultado" id="texto-resultado"></p>
+                        <img src="./Imagenes/Muñeco.png" alt="Imagen ningún texto encontrado" id="muneco">
+                        <p class="titulo-ayuda" id="titulo-ayuda">Ningún mensaje fue encontrado</p>
+                        <p class="ayuda" id="ayuda">Ingresa el texto que deseas encriptar o desencriptar</p>
+                        <button class="copiar" id="copiar">Copiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<script>
+    const texto=document.querySelector("textarea");
+    const botonEnc = document.querySelector("#encriptar");
+    const botonDes = document.querySelector("#desencriptar");
+    const botonCopiar = document.querySelector("#copiar");
+    const textoResultado = document.querySelector("#texto-resultado");
+    const muneco = document.querySelector("#muneco"); 
+    const tituloAyuda = document.querySelector("#titulo-ayuda");
+    const ayuda = document.querySelector("#ayuda");
+
+    function encriptar(texto){
+        let resultado = "";
+        for (let i=0; i<texto.length; i++){
+            if(texto[i] == "e"){
+                resultado = resultado + "enter" 
+            }
+            else if (texto[i] == "i") {
+                resultado = resultado + "imes" 
+            }
+            else if (texto[i] == "a") {
+                resultado = resultado + "ai" 
+            }
+            else if (texto[i] == "o") {
+                resultado = resultado + "ober" 
+            }
+            else if (texto[i] == "u") {
+                resultado = resultado + "ufat" 
+            }
+            else{
+                resultado = resultado + texto[i];
+            }
+        }
+        return resultado;
+    }
+
+    function subTexto(inicial, final, texto){
+        let cadena = "";
+        for(inicial; inicial < final; inicial++){
+            cadena += texto[inicial];
+        }
+        return cadena;
+    }
+
+    function desencriptar(texto){
+        let resultado = "";
+        let i = 0;
+        while(i<texto.length){
+            if(subTexto(i,i+5,texto) == "enter"){
+                resultado += "e";
+                i+=5
+            }
+            else if (subTexto(i,i+4,texto) == "imes"){
+                resultado += "i";
+                i+=4
+            }
+            else if (subTexto(i,i+2,texto) == "ai"){
+                resultado += "a";
+                i+=2
+            }
+            else if (subTexto(i,i+4,texto) == "ober"){
+                resultado += "o";
+                i+=4
+            }
+            else if (subTexto(i,i+4,texto) == "ufat"){
+                resultado += "u";
+                i+=4
+            }
+            else{
+                resultado += texto[i];
+                i++;
+            }
+        }
+        return resultado;
+    }
+
+    function visualizarConjuto(){
+        if (screen.width > 768) {
+            muneco.style.display = "block";
+        } 
+        tituloAyuda.style.display = "block";
+        ayuda.style.display = "block";
+        textoResultado.style.display = "none";
+        botonCopiar.style.display = "none";
+    }
+
+    function ocultarConjunto(){
+        muneco.style.display = "none";
+        tituloAyuda.style.display = "none";
+        ayuda.style.display = "none";
+        textoResultado.style.display = "block";
+        botonCopiar.style.display = "block";
+    }
+
+    function estaVacio(){
+        if (texto.value == ""){
+            visualizarConjuto();
+            textoResultado.textContent="";
+            return true;
+        }
+        return false;
+    }
+    
+    function encriptarTexto(){
+        if (!estaVacio()){
+            textoResultado.textContent=encriptar(texto.value);
+            ocultarConjunto();
+        }    
+    }
+
+    function desencriptarTexto(){
+        if (!estaVacio()){
+            textoResultado.textContent=desencriptar(texto.value);
+            ocultarConjunto();
+        }
+    }
+
+    function copiar() {
+        const resultado = textoResultado.textContent;
+        if (!resultado) {
+            return;
+        }
+        navigator.clipboard.writeText(resultado)
+            .then(() => {
+                alert("Texto copiado al portapapeles");
+                texto.value = "";
+                texto.focus();
+            })
+            .catch(() => {
+                alert("Algo salió mal");
+            })
+    }
+
+    botonEnc.onclick = encriptarTexto;
+    botonDes.onclick = desencriptarTexto;
+    botonCopiar.onclick = copiar;
+
+    function validarEntrada(event){
+        return (event.charCode>=97 && event.charCode<=122) || (event.charCode==32)
+    }
+
+    texto.onkeypress = validarEntrada;
+
+</script>
+</html>

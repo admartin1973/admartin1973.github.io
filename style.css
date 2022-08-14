@@ -1,0 +1,264 @@
+body{
+    font-family: 'Inter', sans-serif;
+}
+
+.fondo{
+    background: #E5E5E5;
+}
+
+.contenedor{
+    position: relative;
+    width: 1440px;
+    height: 100vh;
+    background: #F3F5FC;
+    margin: 0 auto;
+}
+
+.logo{
+    position: absolute;
+    top: 40px;
+    left: 84px;
+}
+
+textarea{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    position: absolute;
+    top: 168px;
+    left: 240px;
+    width: 680px;
+    height: 288px;
+    font-size: 32px;
+    line-height: 48px;
+    color: #0A3871;
+    resize: none;
+    border: none;
+    background: #F3F5FC;
+    text-transform: lowercase;
+}
+
+textarea::placeholder{
+    color: #0A3871;
+}
+
+textarea:focus{
+    outline: none;
+}
+
+.resultado{
+    position: absolute;
+    width: 400px;
+    height: 944px;
+    top: 40px;
+    left: 1000px;
+    border-radius: 42px;
+    background: #FFFFFF;
+}
+
+.texto-resultado{
+    position: absolute;
+    width: 336px;
+    height: 781px;
+    top: 32px;
+    left: 32px;
+    font-size: 24px;
+    color: #495057;
+    line-height: 36px;
+}
+
+.resultado img{
+    position: absolute;
+    top: 243px;
+    left: 32px;
+}
+
+.titulo-ayuda {
+    font-weight: 700;
+    position: absolute;
+    top: 579px;
+    left: 32px;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    font-weight: bold;
+    color: #343A40;
+}
+
+.ayuda{
+    font-weight: 400;
+    position: absolute;
+    top: 653px;
+    left: 32px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #495057;
+}
+
+.copiar{
+    position: absolute;
+    top: 845px;
+    left: 32px;
+    width: 336px;
+    height: 67px;
+    border-radius: 24px;
+    border-color: #0A3871;
+    background: #FFFFFF;
+    color: #0A3871;
+    font-size: 16px;
+    cursor: pointer;
+    display: none;
+}
+
+.signo-admiracion{
+    position: absolute;
+    top: 852px;
+    left: 240px;
+}
+
+legend{
+    position: absolute;
+    top: 851px;
+    left: 264px;
+    font-size: 12px;
+    color: #495057;
+}
+
+.boton-encriptar{
+    position: absolute;
+    top: 885px;
+    left: 240px;
+    width: 328px;
+    height: 67px;
+    border-radius: 24px;
+    background: #0A3871;
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.boton-desencriptar{
+    position: absolute;
+    top: 885px;
+    left: 592px;
+    width: 328px;
+    height: 67px;
+    border-radius: 24px;
+    background: #D8DFE8;
+    color: #0A3871;
+    border-color: #0A3871;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/*Tablets*/
+@media screen and (max-width:768px){
+
+    .logo{
+        width: 10%;
+        margin: 70px 0 90px 40px;
+    }
+
+    /*se oculta la imagen del muñeco*/
+    .resultado img{
+        display: none;
+    }
+
+    /*usamos la el valor flex y flex-direction column de tal forma de ubicar las elementos en columna*/
+    .contenedor{
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: auto;
+        text-align: center;
+    }
+
+    /*sacamos el valor de posicion obsoluto para todos estos elementos*/
+    textarea, .signo-admiracion, .logo, legend, .boton-encriptar, .boton-desencriptar, .resultado, .texto-resultado, .titulo-ayuda, .ayuda, .copiar{
+        position: initial;
+    }
+
+    /*usamos un calculo de alto de tal manera que este elemento regule el alto de la pantalla*/
+    textarea{
+        width: 90vw;
+        height: calc(100vh - 550px);
+        margin: 0 5% 20px;
+    }
+
+    .leyenda{
+        display: flex;
+        flex-direction: row;
+        margin: 0 0 16px 40px;
+    }
+
+    /*las 3 ultimas propiedades son para centrar los elementos del div hijo*/
+    .resultado{
+        width: 90vw;
+        margin: 64px 5% 40px 5%;
+        height: auto;
+        min-height: 133px;
+        border-radius: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+    .texto-resultado, .titulo-ayuda, .ayuda{
+        height: auto;
+    }
+
+    .texto-resultado{
+        width: 100%;
+        text-align: left;
+        margin: 32px 0;
+        display: none;
+    }
+
+    .titulo-ayuda{
+        margin: 0 0 8px;
+    }
+
+    .ayuda{
+        margin: 8px 0 0 0;
+    }
+
+    .botones{
+        text-align: center;
+    }
+
+    .boton-encriptar{
+        margin: 0 15px 0 0;
+    }
+
+    .boton-desencriptar{
+        margin: 0 0 0 15px;
+    }
+
+    .resultado-hijo{
+        width: 90%;
+    }
+
+    .copiar{
+        width: 100%;
+        margin: 0 0 40px;
+        display: none;
+    }
+}
+
+/*Celulares*/
+@media screen and (max-width:694px){
+
+    .logo{
+        width: 20%;
+        margin: 20px 0 50px;
+    }
+
+    .boton-encriptar{
+        margin: 0 0 10px 0;
+    }
+
+    .boton-desencriptar{
+        margin: 10px 0 0 0;
+    }
+}
