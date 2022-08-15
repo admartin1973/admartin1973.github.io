@@ -153,7 +153,7 @@ legend{
 }
 
 /*Tablets*/
-@media screen and (max-width:768px){
+@media screen and (max-width:768px) and (max-aspect-ratio: 1/1){
 
     .logo{
         width: 10%;
@@ -248,7 +248,7 @@ legend{
 }
 
 /*Celulares*/
-@media screen and (max-width:694px){
+@media screen and (max-width:694px) and (max-aspect-ratio: 1/1){
 
     .logo{
         width: 20%;
